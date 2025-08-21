@@ -2,10 +2,29 @@ const express = require("express");
 const multer = require("multer");
 const postModel = require("./models/post.model");
 const uploadFile = require("./services/store.service");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser);
 
+// CORS (production-safe config)
+const ALLOWED_ORIGINS = [process.env.FRONTEND_URL];
+
+app.use(
+  cors({
+    origin: (origin, cb) => {
+      // allow REST tools / server-to-server (no origin)
+
+      if (!origin) return cb(null, true);
+    if (ALLOWED_ORIGINS.includes(origin)) return cb(null, true); 
+    return cb(new Error("Not allowed by CORS"));
+    },
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true, // IMPORTANT if using cookies/JWT
+  })
+)
 // multer memory storage
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
