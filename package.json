@@ -1,0 +1,22 @@
+{
+  "name": "day-4",
+  "version": "1.0.0",
+  "description": "\"Create a mini project\"",
+  "main": "server.js",
+  "scripts": {
+    "test": "npx nodemon"
+  },
+  "keywords": [
+    "express"
+  ],
+  "author": "Ashu",
+  "license": "ISC",
+  "dependencies": {
+    "config": "^4.1.1",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "imagekit": "^6.0.0",
+    "mongoose": "^8.17.2",
+    "multer": "^2.0.2"
+  }
+}
